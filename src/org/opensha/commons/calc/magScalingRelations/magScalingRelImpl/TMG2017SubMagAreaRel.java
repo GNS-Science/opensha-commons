@@ -120,7 +120,11 @@ public class TMG2017SubMagAreaRel extends MagAreaRelationship {
 		}
 		if ((rake <= 45 && rake >= -45) || rake >= 135 || rake <= -135) {
 			// strike slip
+<<<<<<< HEAD
 			return  Double.NaN;
+=======
+			return Math.pow(10.0, -3.486 + 0.942 * mag);
+>>>>>>> f7db9733c6623890e744e003aa0de0caf82bda05
 		} else if (rake > 0) {
 			// interface
 			return Math.pow(10.0, -3.292 + 0.949 * mag);
@@ -149,7 +153,11 @@ public class TMG2017SubMagAreaRel extends MagAreaRelationship {
     public void setRake(double rake) {
     	if ((rake <= 45 && rake >= -45) || rake >= 135 || rake <= -135) {
     		throw new InvalidRangeException(
+<<<<<<< HEAD
     				"Rake angle should be either within (45, 135) for interface or (-45, -135) for inslab-normal events"
+=======
+    				"Rake angle should be either within (45, 135) for interface or (-45, -135) for inslab-normal"
+>>>>>>> f7db9733c6623890e744e003aa0de0caf82bda05
     				);
     	}	
     	else {

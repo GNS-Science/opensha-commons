@@ -7,7 +7,8 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         TestTMG2017CruMagAreaRel.class,
-        TestTMG2017SubMagAreaRel.class
+        TestTMG2017SubMagAreaRel.class,
+        TestAH2017InterfaceBilinearMagAreaRel.class
 })
 
 public class MagScalingRelSuite {

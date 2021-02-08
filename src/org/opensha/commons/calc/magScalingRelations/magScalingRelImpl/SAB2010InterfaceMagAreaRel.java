@@ -24,7 +24,7 @@ import org.opensha.commons.exceptions.InvalidRangeException;
 import org.opensha.commons.util.FaultUtils;
 
 /**
- * <b>Title:</b>AH2017InterfaceBilinearMagAreaRel<br>
+ * <b>Title:</b>SAB2010InterfaceMagAreaRel<br>
  *
  * <b>Description:</b>
  * <p>

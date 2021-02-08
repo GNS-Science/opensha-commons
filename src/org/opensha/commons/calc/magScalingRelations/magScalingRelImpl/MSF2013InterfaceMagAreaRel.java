@@ -24,28 +24,26 @@ import org.opensha.commons.exceptions.InvalidRangeException;
 import org.opensha.commons.util.FaultUtils;
 
 /**
- * <b>Title:</b>SST2016InterfaceMagAreaRel<br>
+ * <b>Title:</b>MSF2013InterfaceMagAreaRel<br>
  *
  * <b>Description:</b>
  * <p>
  * <b>Description:</b>
  * <p>
- *  Implements Skarlatoudis, A.A., Somerville, P. G., and Thio, H.K. (2016). 
- *  Source-Scaling Relations of Interface Subduction Earthquakes for Strong Ground Motion and Tsunami Simulation. 
- *  Bulletin of the Seismological Society of America, Vol. 106, No. 4, pp. 1652–1662, August 2016, doi: 10.1785/0120150320
+ *  Murotani, S., Satake, K., and Fujii, Y. (2013). Scaling relations of 
+ *  seismic moment, rupture area, average slip, and asperity size 
+ *  for M ∼ 9 subduction-zone earthquakes, 
+ *  Geophys. Res. Lett. 40, 5070–5074.
  *  
- *  Mo(Nm) = ((LOG10(A)-LOG10(0.000000000177))*3)/2 A in km2
- *  Mw = ((Mo+7)-16.05)/1.5
- * 
  * </p>
  *
  * @version 0.0
  */
 
-public class SST2016InterfaceMagAreaRel extends MagAreaRelationship {
+public class MSF2013InterfaceMagAreaRel extends MagAreaRelationship {
 
-	final static String C = "SST2016InterfaceMagAreaRel";
-	public final static String NAME = "Skarlatoudis et al. (2016)";
+	final static String C = "MSF2013InterfaceMagAreaRel";
+	public final static String NAME = "Murotani et al. (2016)";
 
 	/**
 	 * Computes the median magnitude from rupture area 
@@ -56,8 +54,7 @@ public class SST2016InterfaceMagAreaRel extends MagAreaRelationship {
 	 */
 	public double getMedianMag(double area) {
 		double log10Mo;
-		log10Mo = 1.5*(Math.log10(area)-Math.log10(0.000000000177));
-		
+		log10Mo = 1.5*(Math.log10(area)-Math.log10(0.000000000134));
 		return (log10Mo-9.05)/1.5;
 	}
 
@@ -82,10 +79,9 @@ public class SST2016InterfaceMagAreaRel extends MagAreaRelationship {
 	 */
 	
 	public double getMedianArea(double mag) {
-		double log10Mo;
-		
+		double log10Mo;	
 		log10Mo = 1.5*mag+9.05;
-		return Math.pow(10.0, (log10Mo/1.5 + Math.log10(0.000000000177)));
+		return Math.pow(10.0, (log10Mo/1.5 + Math.log10(0.000000000134)));
 	}
 
 	/**
@@ -95,7 +91,7 @@ public class SST2016InterfaceMagAreaRel extends MagAreaRelationship {
 	 * @return standard deviation
 	 */
 	public double getAreaStdDev() {
-		return 1.498;
+		return 1.54;
 	}
 	
   

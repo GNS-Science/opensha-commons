@@ -9,8 +9,9 @@ import org.junit.runners.Suite;
         TestTMG2017CruMagAreaRel.class,
         TestTMG2017SubMagAreaRel.class,
         TestAH2017InterfaceBilinearMagAreaRel.class,
-        TestSAB2010InterfaceMagAreaRel.class
-        
+        TestSAB2010InterfaceMagAreaRel.class,
+        TestSST2016InterfaceMagAreaRel.class,
+        TestMSF2013InterfaceMagAreaRel.class
 })
 
 public class MagScalingRelSuite {

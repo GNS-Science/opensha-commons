@@ -222,6 +222,13 @@ public class GMT_MapGenerator implements SecureMapGenerator, Serializable {
 	protected final static boolean GMT_SMOOTHING_DEFAULT = true;
 	private BooleanParameter gmtSmoothingParam; 
 
+	// Apply GMT smoothing
+	public final static String GRD_VIEW_PARAM_NAME = "Use grdview instead of grdimage?";
+	private final static String GRD_VIEW_PARAM_INFO = "Uses the grdview command instead of grdimage when smoothing and topography are disabled."
+			+ " This is slower, but looks better for extremely high resolution maps.";
+	protected final static boolean GRD_VIEW_DEFAULT = false;
+	private BooleanParameter grdViewParam; 
+
 
 	// Apply GMT smoothing
 	public final static String BLACK_BACKGROUND_PARAM_NAME = "Apply Black Background?";
@@ -374,6 +381,10 @@ public class GMT_MapGenerator implements SecureMapGenerator, Serializable {
 		gmtSmoothingParam.setInfo(GMT_SMOOTHING_PARAM_INFO);
 
 		// whether to apply GMT smoothing
+		this.grdViewParam = new BooleanParameter(GRD_VIEW_PARAM_NAME, GRD_VIEW_DEFAULT);
+		grdViewParam.setInfo(GRD_VIEW_PARAM_INFO);
+
+		// whether to apply GMT smoothing
 		this.blackBackgroundParam = new BooleanParameter(BLACK_BACKGROUND_PARAM_NAME, BLACK_BACKGROUND_PARAM_DEFAULT);
 		blackBackgroundParam.setInfo(BLACK_BACKGROUND_PARAM_INFO);
 
@@ -405,6 +416,7 @@ public class GMT_MapGenerator implements SecureMapGenerator, Serializable {
 		adjustableParams.addParameter(gmtFromServer);
 		adjustableParams.addParameter(logPlotParam);
 		adjustableParams.addParameter(kmlParam);
+		adjustableParams.addParameter(grdViewParam);
 
 
 	}
@@ -553,6 +565,8 @@ public class GMT_MapGenerator implements SecureMapGenerator, Serializable {
 		}
 		
 		map.setUseGMTSmoothing(gmtSmoothingParam.getValue());
+		
+		map.setUseGRDView(grdViewParam.getValue());
 
 		map.setBlackBackground(blackBackgroundParam.getValue());
 		
@@ -1476,7 +1490,11 @@ public class GMT_MapGenerator implements SecureMapGenerator, Serializable {
 			
 			if (!map.isUseGMTSmoothing()) {
 				if (!contourOnly) {
-					commandLine="${GMT_PATH}grdimage "+ grdFileName + xOff + yOff + projWdth + " -C"+cptFile+" -K"+ region + " > " + psFileName;
+					// TODO
+					if (map.isUseGRDView())
+						commandLine="${GMT_PATH}grdview "+ grdFileName + xOff + yOff + projWdth + " -C"+cptFile+" -Ts -K"+ region + " > " + psFileName;
+					else
+						commandLine="${GMT_PATH}grdimage "+ grdFileName + xOff + yOff + projWdth + " -C"+cptFile+" -K"+ region + " > " + psFileName;
 					gmtCommandLines.add(commandLine+"\n");
 				}
 			}

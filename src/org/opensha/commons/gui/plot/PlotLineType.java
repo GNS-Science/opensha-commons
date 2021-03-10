@@ -54,7 +54,7 @@ public enum PlotLineType {
 			return new BasicStroke(lineWidth);
 		else if (this == DOTTED)
 			return new BasicStroke(lineWidth, BasicStroke.CAP_BUTT,
-					BasicStroke.JOIN_BEVEL,0,new float[] {1},0);
+					BasicStroke.JOIN_BEVEL,0,new float[] {Float.min(6, Float.max(lineWidth*0.7f, 1))},0);
 		else if (this == DASHED)
 			return new BasicStroke(lineWidth, BasicStroke.CAP_BUTT,
 					BasicStroke.JOIN_BEVEL,0,new float[] {9},0);
@@ -143,7 +143,9 @@ public enum PlotLineType {
 			} else {
 				renderer = lineShpRend;
 				Stroke stroke = plt.buildStroke(lineWidth);
-				renderer.setStroke(stroke);
+//				renderer.setStroke(stroke);
+//				renderer.setDefaultStroke(stroke);
+				renderer.setSeriesStroke(0, stroke);
 //				renderer.setBaseStroke(stroke);
 			}
 		}
@@ -157,9 +159,11 @@ public enum PlotLineType {
 			Preconditions.checkArgument(symWidth > 0, "symbol widht must be >0");
 			Shape shape = sym.buildShape(symWidth);
 			Preconditions.checkNotNull(shape, "Couldn't build shape for symbol: "+sym);
-			renderer.setShape(shape);
+//			renderer.setShape(shape);
+			renderer.setSeriesShape(0, shape);
 //			stdRend.setBaseShape(shape);
-			lineShpRend.setShapesFilled(sym.isFilled());
+//			lineShpRend.setShapesFilled(sym.isFilled());
+			lineShpRend.setSeriesShapesFilled(0, sym.isFilled());
 //			stdRend.setBaseShapesFilled(sym.isFilled());
 			
 		}

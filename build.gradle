@@ -39,6 +39,8 @@ dependencies {
     compileAndResource files('lib/ojdbc5.jar')
     compileAndResource files('lib/sdoapi.jar')
     compileAndResource files('lib/EventWebService.jar')
+    
+    testImplementation 'junit:junit:4.13'
+    testImplementation 'org.hamcrest:hamcrest-core:1.3'
 
-    testCompileOnly 'junit:junit:4.12'
 }
